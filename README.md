@@ -61,6 +61,37 @@ While a game runs, your Discord profile shows "Playing Flash Launcher" with the 
 - **Watched folders**: SWFs saved into these folders are imported on their own (checked at startup and when the window regains focus, at most once a minute). Files are remembered by hash, so a game you delete stays deleted.
 - **Back up library**: one zip with the database (games, saves, play time, collections, settings including API keys), SWFs, art and downloads. **Restore** swaps the whole library for a backup and keeps the old one in `before-restore/`.
 
+## Making an installer
+
+```
+npm run tauri build
+```
+
+On Windows this makes `src-tauri\target\release\bundle\nsis\Flash Launcher_<version>_x64-setup.exe` (hand this one out) and an `.msi`. The installer is per-user (no admin needed), sets up WebView2 if the PC doesn't have it, and adds a Start menu entry and an uninstaller. It isn't code-signed, so Windows SmartScreen asks before running it the first time ("More info" → "Run anyway").
+
+## Releasing (with in-app updates)
+
+One-time setup, on your own computer:
+
+```
+npm run setup-updater
+```
+
+That makes the key that signs releases (kept in `~/.tauri/`, never in the repo; back it up), writes its public half into `src-tauri/tauri.conf.json` (commit that), and saves the private key and password as GitHub Actions secrets (`TAURI_SIGNING_PRIVATE_KEY`, `TAURI_SIGNING_PRIVATE_KEY_PASSWORD`). It uses the GitHub CLI if you have it; otherwise it prints what to paste where. In the repo's Settings → Actions → General, set workflow permissions to "Read and write" so the workflow can create releases.
+
+Each release:
+
+```
+npm run bump 0.8.0
+git commit -am "0.8.0"
+git tag v0.8.0
+git push origin main v0.8.0
+```
+
+The `release` workflow builds Windows, macOS (Apple Silicon and Intel) and Linux installers and uploads them to a **draft** release with the signed update files and `latest.json`. Write the notes and hit Publish on GitHub; installed copies check once a day (or from settings → about) and show an "update now" bar. Updates only install if they're signed with your key and the signature matches the version announced.
+
+macOS builds aren't notarized, so Mac users have to right-click → Open the first time.
+
 ## Tests
 
 ```
@@ -137,6 +168,7 @@ src/
   pages/Browse/  Flashpoint search, entry dialog
   browse/        background download queue and progress strip
   lib/gamepad.ts controller navigation for the launcher's own screens
+  update/        in-app update check, "update now" strip
   player/gamepadMap.ts, ControllerDialog  per-game controller -> key layouts
 src-tauri/src/
   swf/           SWF reader: header, zlib/LZMA, tags, embedded bitmaps
@@ -152,6 +184,8 @@ src-tauri/src/
   watch.rs       watched-folder scanning
   backup.rs      library backup zip and restore
   discord.rs     Discord Rich Presence over the local IPC pipe
+scripts/         copy-ruffle (before every build), setup-updater, bump-version
+.github/workflows/release.yml  installers for every OS + update feed on a tag push
   db.rs          schema and migrations (PRAGMA user_version)
   commands.rs    the Tauri commands the UI calls
 ```

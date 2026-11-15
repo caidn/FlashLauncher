@@ -8,6 +8,9 @@ import { useScrape } from "../../art/ScrapeProvider";
 import { useLibrary } from "../../data/LibraryProvider";
 import { api } from "../../lib/api";
 import { formatBytes } from "../../lib/format";
+import { useUpdates } from "../../update/UpdateProvider";
+import notices from "../../../THIRD_PARTY_NOTICES.md?raw";
+import { BandDialog } from "../../components/Dialog/BandDialog";
 import { ACCENTS, accentById, readableOn } from "../../theme/accents";
 import { useTheme } from "../../theme/ThemeProvider";
 import p from "../page.module.css";
@@ -27,6 +30,9 @@ export function Settings() {
   });
   const [folders, setFolders] = useState<string[]>([]);
   const [discord, setDiscord] = useState(true);
+  const [showNotices, setShowNotices] = useState(false);
+  const [updateNote, setUpdateNote] = useState<string | null>(null);
+  const updates = useUpdates();
   const [scanning, setScanning] = useState(false);
   const [backup, setBackup] = useState<BackupProgress | null>(null);
   const [restoreFrom, setRestoreFrom] = useState<string | null>(null);
@@ -365,10 +371,46 @@ export function Settings() {
       <section className={`${p.section} ts`} style={{ ["--i" as string]: 7 }}>
         <h2 className={p.sectionTitle}>about</h2>
         <p className={p.body}>
-          Flash Launcher 0.6.0. Flash runs through Ruffle. Game info, art and downloads come from Flashpoint Archive,
-          with more art and details from SteamGridDB, IGDB and the Internet Archive.
+          Flash Launcher {updates.version || "(preview)"}. Flash runs through Ruffle. Game info, art and downloads come
+          from Flashpoint Archive, with more art and details from SteamGridDB, IGDB and the Internet Archive.
         </p>
+        <div className={s.actionsRow}>
+          {updates.available && (
+            <Button
+              onClick={async () => {
+                setUpdateNote(null);
+                try {
+                  const got = await updates.check();
+                  setUpdateNote(got ? "There's an update: see the bar along the bottom." : "You're on the newest version.");
+                } catch (e) {
+                  setUpdateNote(`Couldn't check: ${e instanceof Error ? e.message : String(e)}`);
+                }
+              }}
+              disabled={updates.checking}
+            >
+              {updates.checking ? "checking…" : "check for updates"}
+            </Button>
+          )}
+          <Button onClick={() => setShowNotices(true)}>open-source licenses</Button>
+          {updateNote && <span className={s.actionsHint}>{updateNote}</span>}
+        </div>
       </section>
+
+      {showNotices && (
+        <BandDialog
+          title="open-source licenses"
+          onCancel={() => setShowNotices(false)}
+          wide
+          tall
+          actions={
+            <Button variant="accent" onClick={() => setShowNotices(false)} data-autofocus>
+              close
+            </Button>
+          }
+        >
+          <pre className={s.notices}>{notices}</pre>
+        </BandDialog>
+      )}
 
       {restoreFrom && (
         <ConfirmDialog

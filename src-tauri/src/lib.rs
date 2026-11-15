@@ -44,6 +44,8 @@ impl AppState {
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_process::init())
         .register_asynchronous_uri_scheme_protocol(content::SCHEME, |ctx, request, responder| {
             let st = Arc::clone(ctx.app_handle().state::<Arc<AppState>>().inner());
             let path = request.uri().path().to_string();
@@ -108,6 +110,7 @@ pub fn run() {
             commands::library_restore,
             commands::open_external,
             commands::discord_clear,
+            commands::updates_configured,
         ])
         .run(tauri::generate_context!())
         .expect("error while running Flash Launcher");

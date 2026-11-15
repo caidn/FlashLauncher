@@ -508,3 +508,17 @@ pub async fn open_external(target: String) -> AppResult<()> {
         .map_err(|e| AppError(format!("couldn't open it: {e}")))?;
     Ok(())
 }
+
+/// True once the update signing key is set up (scripts/setup-updater.mjs
+/// writes its public half into tauri.conf.json). Before that, builds can't
+/// verify updates, so the UI doesn't offer them.
+#[tauri::command]
+pub fn updates_configured(app: AppHandle) -> bool {
+    app.config()
+        .plugins
+        .0
+        .get("updater")
+        .and_then(|u| u.get("pubkey"))
+        .and_then(|k| k.as_str())
+        .is_some_and(|k| !k.trim().is_empty())
+}

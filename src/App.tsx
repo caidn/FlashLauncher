@@ -20,6 +20,7 @@ import { Settings } from "./pages/Settings/Settings";
 import { Player } from "./player/Player";
 import type { Route } from "./routes";
 import { useReducedMotion } from "./theme/ThemeProvider";
+import { UpdateProvider } from "./update/UpdateProvider";
 import s from "./App.module.css";
 
 const ROUTES: Route[] = ["home", "library", "collections", "browse", "add", "settings"];
@@ -174,6 +175,7 @@ export function App() {
 
   return (
     <NavContext.Provider value={nav}>
+      <UpdateProvider paused={shown.kind === "play"}>
       <ImportProvider onImported={() => page === "add" && navigate("library")}>
         <div className={s.app} data-view={shown.kind}>
           {!fullscreen && <TitleBar subtitle={playing?.title} />}
@@ -195,6 +197,7 @@ export function App() {
           </main>
         </div>
       </ImportProvider>
+      </UpdateProvider>
     </NavContext.Provider>
   );
 }
