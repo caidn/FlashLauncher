@@ -1,0 +1,26 @@
+/* Sits above the download and art strips when they're showing. */
+.strip {
+  z-index: 91;
+}
+
+:global(html[data-downloading="true"]) .strip,
+:global(html[data-scraping="true"]) .strip {
+  bottom: 52px;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-fg) 30%, transparent);
+}
+
+:global(html[data-downloading="true"][data-scraping="true"]) .strip {
+  bottom: 104px;
+}
+
+.later {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  opacity: 0.85;
+  padding: 4px 6px;
+}
+
+.later:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
