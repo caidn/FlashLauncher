@@ -1,0 +1,368 @@
+.page {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  height: clamp(280px, 50vh, 560px);
+  overflow: hidden;
+  will-change: clip-path;
+}
+
+.heroImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* split header: picture on the right half */
+.sidePic {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 52%;
+  overflow: hidden;
+}
+
+.sidePic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidePic[data-contain="true"] img {
+  object-fit: contain;
+  padding: 32px;
+}
+
+.hero[data-mode="split"] .heroTitle {
+  right: 54%;
+  top: 80px;
+  align-items: center;
+}
+
+.heroGlyph {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.16;
+  line-height: 0;
+}
+
+.back {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  color: #fff;
+  transition: background-color var(--dur-fast) linear;
+}
+
+.back:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.back:active {
+  background: #fff;
+  color: #000;
+}
+
+.heroTitle {
+  position: absolute;
+  left: var(--edge);
+  right: 30%;
+  bottom: 28px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.logo {
+  max-width: 100%;
+  max-height: clamp(90px, 18vh, 180px);
+  object-fit: contain;
+  object-position: left bottom;
+}
+
+/* a title card (Flashpoint "logo") is a picture, not a cut-out: frame it */
+.logo[data-card="true"] {
+  max-height: clamp(120px, 28vh, 260px);
+  outline: 3px solid rgba(255, 255, 255, 0.9);
+  outline-offset: -3px;
+}
+
+.titleText {
+  font-size: var(--fs-hub);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Over a picture, the title gets a flat dark plate: a scrim only where
+   the text needs it. */
+.titleText[data-on-image="true"] {
+  font-size: clamp(44px, 6vw, 84px);
+  padding: 6px 16px 12px;
+  background: rgba(0, 0, 0, 0.62);
+  color: #fff;
+}
+
+/* ---------- action bar ---------- */
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 22px var(--edge) 10px;
+  flex-wrap: wrap;
+}
+
+.play {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+  min-width: 180px;
+  padding: 0 28px 0 22px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  transition: filter var(--dur-fast) linear, transform var(--dur-fast) var(--ease-out);
+}
+
+.play:hover {
+  filter: brightness(1.1);
+}
+
+.play:active {
+  transform: scale(0.97);
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.statBig {
+  font-size: var(--fs-title);
+  font-weight: 300;
+}
+
+.statSmall {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  gap: 2px;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 70px;
+  padding: 4px;
+  font-size: var(--fs-caption);
+  color: var(--fg);
+}
+
+.actionGlyph {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--line-strong);
+  transition: background-color var(--dur-fast) linear, color var(--dur-fast) linear;
+}
+
+.action:hover .actionGlyph {
+  background: var(--bg-3);
+}
+
+.action:active .actionGlyph {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.action[data-active="true"] .actionGlyph {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+/* ---------- body ---------- */
+
+.body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+  gap: 56px;
+  padding: 18px var(--edge) 56px;
+}
+
+.description {
+  max-width: 760px;
+  color: var(--fg-2);
+  line-height: 1.6;
+  white-space: pre-line;
+  user-select: text;
+}
+
+.noDescription,
+.muted {
+  color: var(--fg-3);
+}
+
+.link {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.section {
+  margin-top: 30px;
+}
+
+.sectionTitle {
+  font-size: var(--fs-title);
+  font-weight: 300;
+  margin-bottom: 12px;
+}
+
+.shots {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.shot {
+  flex: none;
+  width: 240px;
+  height: 160px;
+  background: var(--bg-2);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color var(--dur-fast) linear;
+}
+
+.shot:hover {
+  outline-color: var(--fg-2);
+}
+
+.shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag,
+.collection {
+  padding: 4px 10px 5px;
+  background: var(--bg-2);
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.collection {
+  color: var(--fg);
+  transition: background-color var(--dur-fast) linear;
+}
+
+.collection:hover {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.details {
+  margin: 0;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-small);
+}
+
+.detail:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.detail dt {
+  color: var(--fg-3);
+}
+
+.detail dd {
+  margin: 0;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+/* ---------- screenshot viewer ---------- */
+
+@keyframes viewer-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.viewer {
+  position: fixed;
+  inset: var(--titlebar-h) 0 0 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.9);
+  cursor: zoom-out;
+  animation: viewer-in var(--dur) linear both;
+}
+
+.viewer img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 1100px) {
+  .body {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

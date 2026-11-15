@@ -1,0 +1,56 @@
+:root {
+  /* type */
+  --font: "Segoe UI", "Selawik", system-ui, sans-serif;
+  --fs-hub: clamp(72px, 9vw, 132px);
+  --fs-pivot: 44px;
+  --fs-page: 56px;
+  --fs-group: 28px;
+  --fs-title: 20px;
+  --fs-body: 15px;
+  --fs-small: 13px;
+  --fs-caption: 11px;
+
+  /* tile grid: one unit is a small tile, everything else is a multiple */
+  --gap: 8px;
+  --rows: 6;
+  --u: clamp(56px, calc((100vh - 236px - 5 * var(--gap)) / var(--rows)), 104px);
+
+  /* layout */
+  --titlebar-h: 32px;
+  --edge: 56px; /* left content margin, everything aligns to this */
+
+  /* motion: the Windows 8 "fast out, slow in" curve */
+  --ease-out: cubic-bezier(0.1, 0.9, 0.2, 1);
+  --ease-in: cubic-bezier(0.7, 0, 1, 0.5);
+  --dur-fast: 150ms;
+  --dur: 250ms;
+  --dur-slow: 350ms;
+
+  /* accent (overwritten at runtime by the theme provider) */
+  --accent: #1ba1e2;
+  --accent-fg: #ffffff;
+}
+
+[data-theme="dark"] {
+  --bg: #111111;
+  --bg-2: #1c1c1c;
+  --bg-3: #2a2a2a;
+  --fg: #ffffff;
+  --fg-2: rgba(255, 255, 255, 0.62);
+  --fg-3: rgba(255, 255, 255, 0.36);
+  --line: rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(255, 255, 255, 0.8);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-2: #f1f1f1;
+  --bg-3: #e2e2e2;
+  --fg: #111111;
+  --fg-2: rgba(0, 0, 0, 0.62);
+  --fg-3: rgba(0, 0, 0, 0.38);
+  --line: rgba(0, 0, 0, 0.14);
+  --line-strong: rgba(0, 0, 0, 0.8);
+  color-scheme: light;
+}

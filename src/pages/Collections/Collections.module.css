@@ -1,0 +1,209 @@
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 8px 0 28px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px 16px;
+}
+
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  will-change: transform;
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.cell,
+.emptyCell {
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+}
+
+
+.card:hover .strip {
+  outline: 2px solid var(--fg-2);
+  outline-offset: 2px;
+}
+
+.emptyCell {
+  background: var(--bg-2);
+}
+
+.name {
+  font-size: var(--fs-title);
+  font-weight: 300;
+}
+
+.sub {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.none {
+  font-size: var(--fs-group);
+  font-weight: 300;
+  color: var(--fg-3);
+}
+
+/* ---------- one collection ---------- */
+
+.view {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.viewHead {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  padding: 14px var(--edge) 0 18px;
+}
+
+.back {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 8px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--line-strong);
+  color: var(--fg);
+  transition: background-color var(--dur-fast) linear;
+}
+
+.back:hover {
+  background: var(--bg-3);
+}
+
+.back:active {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.viewTitleBox {
+  flex: 1;
+  min-width: 0;
+}
+
+.kicker {
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.viewTitle {
+  font-size: var(--fs-page);
+  font-weight: 300;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.viewActions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.viewCount {
+  padding: 18px var(--edge) 10px;
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.viewScroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 4px var(--edge) 40px;
+}
+
+.viewScroll[data-bar="true"] {
+  padding-bottom: 120px;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  max-width: 360px;
+  padding: 0 10px;
+  margin-bottom: 12px;
+  background: var(--bg-3);
+  border: 2px solid transparent;
+  color: var(--fg-2);
+}
+
+.filter:focus-within {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+
+.filter input {
+  flex: 1;
+  background: none;
+  border: 0;
+  outline: none;
+}
+
+.pickList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.pickList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+}
+
+.pickList li:first-child {
+  border-top: 0;
+}
+
+.swatch {
+  width: 22px;
+  height: 22px;
+  flex: none;
+}
+
+.pickTitle {
+  color: var(--fg);
+}
+
+.pickSub {
+  font-size: var(--fs-small);
+  color: var(--fg-3);
+}
+
+.pickEmpty {
+  color: var(--fg-3);
+}

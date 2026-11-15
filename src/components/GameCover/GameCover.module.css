@@ -1,0 +1,82 @@
+/* ---------- grid ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 24px 12px;
+}
+
+.cover {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  will-change: transform;
+}
+
+.coverArt {
+  position: relative;
+  display: block;
+  outline: 3px solid transparent;
+  outline-offset: 3px;
+  transition: outline-color var(--dur-fast) linear;
+}
+
+.cover:hover .coverArt {
+  outline-color: var(--fg-2);
+}
+
+/* Windows 8 selection: accent frame plus a check in a corner triangle */
+.cover[data-selected="true"] .coverArt {
+  outline-color: var(--accent);
+}
+
+.check {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 40px 40px 0;
+  border-color: transparent var(--accent) transparent transparent;
+}
+
+.check::after {
+  content: "";
+  position: absolute;
+  right: -36px;
+  top: 7px;
+  width: 11px;
+  height: 6px;
+  border-left: 2px solid var(--accent-fg);
+  border-bottom: 2px solid var(--accent-fg);
+  transform: rotate(-45deg);
+}
+
+.coverMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.coverTitle {
+  font-size: var(--fs-body);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.coverSub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.coverSub svg {
+  color: var(--accent);
+}
+

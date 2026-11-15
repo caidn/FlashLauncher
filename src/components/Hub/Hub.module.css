@@ -1,0 +1,65 @@
+.hub {
+  flex: 1;
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.track {
+  display: flex;
+  gap: calc(var(--u) * 0.9);
+  height: 100%;
+  padding: 0 var(--edge) 28px;
+  width: max-content;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupTitle {
+  font-size: var(--fs-group);
+  font-weight: 300;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding-top: 8px;
+  white-space: nowrap;
+}
+
+.groupTitle button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fg);
+  transition: color var(--dur-fast) linear;
+}
+
+.groupTitle button:hover {
+  color: var(--accent);
+}
+
+.groupTitle svg {
+  opacity: 0.6;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.groupTitle button:hover svg {
+  transform: translateX(4px);
+}
+
+/* The tile grid: fills column by column, densely, like the start screen. */
+.tiles {
+  display: grid;
+  grid-template-rows: repeat(var(--rows), var(--u));
+  grid-auto-columns: var(--u);
+  grid-auto-flow: column dense;
+  gap: var(--gap);
+}
+
+.plain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}

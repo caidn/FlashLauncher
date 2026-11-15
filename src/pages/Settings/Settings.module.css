@@ -1,0 +1,188 @@
+.current {
+  color: var(--fg-2);
+  margin-bottom: 12px;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(10, 52px);
+  gap: 8px;
+}
+
+.swatch {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.swatch:active {
+  transform: scale(0.94);
+}
+
+/* selected: a check-mark notch in the corner, like the WP accent picker */
+.swatch[data-active="true"] {
+  outline: 3px solid var(--fg);
+  outline-offset: 3px;
+}
+
+.swatch[data-active="true"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 14px;
+  height: 7px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 6px 16px;
+  margin: 0;
+  max-width: 720px;
+}
+
+.facts dt {
+  color: var(--fg-2);
+}
+
+.facts dd {
+  margin: 0;
+}
+
+.path {
+  font-size: var(--fs-small);
+  user-select: text;
+  word-break: break-all;
+  color: var(--fg-2);
+}
+
+.blurb {
+  margin-bottom: 12px;
+}
+
+.pathRow {
+  display: flex;
+  gap: 10px;
+  max-width: 720px;
+}
+
+.keys {
+  margin-top: 14px;
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.keys kbd {
+  display: inline-block;
+  min-width: 22px;
+  padding: 0 5px;
+  border: 1px solid var(--line-strong);
+  font: inherit;
+  font-size: var(--fs-caption);
+  text-align: center;
+}
+
+.keyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px 16px;
+  max-width: 900px;
+}
+
+.keyGrid label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.keyGrid small {
+  font-size: var(--fs-caption);
+  color: var(--fg-3);
+  user-select: text;
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.actionsHint {
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.subTitle {
+  margin: 26px 0 10px;
+  font-size: var(--fs-body);
+  font-weight: 600;
+}
+
+.defaults {
+  display: grid;
+  grid-template-columns: 90px auto;
+  justify-content: start;
+  align-items: center;
+  gap: 10px 16px;
+  margin-bottom: 14px;
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.folders {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 720px;
+}
+
+.folders li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg-2);
+}
+
+.folders li .path {
+  flex: 1;
+  color: var(--fg);
+}
+
+.remove,
+.inlineLink {
+  font-size: var(--fs-small);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.remove:hover,
+.inlineLink:hover {
+  text-decoration: underline;
+}
+
+.gap {
+  margin-top: 20px;
+}
+
+.backupProgress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 260px;
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+
+.backupProgress > div {
+  flex: 1;
+}

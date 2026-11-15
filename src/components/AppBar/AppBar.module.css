@@ -1,0 +1,77 @@
+.bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px 0 var(--edge);
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  transform: translateY(100%);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.bar[data-open="true"] {
+  transform: none;
+}
+
+:global([data-scraping="true"]) .bar,
+:global([data-downloading="true"]) .bar {
+  bottom: 52px;
+}
+
+:global([data-scraping="true"][data-downloading="true"]) .bar {
+  bottom: 104px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: var(--fs-title);
+  font-weight: 300;
+}
+
+.commands {
+  display: flex;
+  gap: 4px;
+}
+
+.command {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 76px;
+  padding: 8px 6px;
+  font-size: var(--fs-caption);
+  color: var(--fg);
+  text-transform: lowercase;
+}
+
+/* Square glyph frame: the Metro app bar's circled icons, made sharp. */
+.glyph {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--line-strong);
+  transition: background-color var(--dur-fast) linear, color var(--dur-fast) linear;
+}
+
+.command:hover .glyph {
+  background: var(--bg-3);
+}
+
+.command:active .glyph {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.command:disabled {
+  opacity: 0.35;
+}

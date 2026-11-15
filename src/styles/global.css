@@ -1,0 +1,157 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border-radius: 0; /* Metro is sharp. No exceptions. */
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+}
+
+input,
+textarea {
+  user-select: text;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+h1, h2, h3, h4, p {
+  margin: 0;
+  font-weight: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Focus moved by a controller always shows, even after a mouse click. */
+html[data-input="gamepad"] :focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* flat, thin scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--fg-3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-2);
+}
+
+/* ---------- page transitions: turnstile ---------- */
+
+@keyframes turnstile-in {
+  from {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(-72deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes turnstile-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: perspective(1400px) rotateY(60deg);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Anything marked .ts swings in on page entry, staggered by --i. */
+[data-phase="in"] .ts {
+  transform-origin: left center;
+  animation: turnstile-in var(--dur-slow) var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+[data-phase="out"] .ts,
+[data-phase="out"] .stagger {
+  transform-origin: left center;
+  animation: turnstile-out var(--dur-fast) var(--ease-in) both;
+  animation-delay: calc(var(--i, 0) * 15ms);
+}
+
+/* List rows slide in from the right, staggered. */
+[data-phase="in"] .stagger {
+  animation: slide-in var(--dur-slow) var(--ease-out) backwards;
+  animation-delay: calc(80ms + min(var(--i, 0), 20) * 22ms);
+}
+
+[data-motion="reduced"] *,
+[data-motion="reduced"] *::before,
+[data-motion="reduced"] *::after {
+  animation-duration: 1ms !important;
+  animation-delay: 0ms !important;
+  transition-duration: 1ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+}

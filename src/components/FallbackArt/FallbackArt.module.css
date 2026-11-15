@@ -1,0 +1,147 @@
+.art {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  container-type: size;
+}
+
+.art[data-variant="cover"] {
+  aspect-ratio: 2 / 3;
+  height: auto;
+}
+
+.glyph {
+  position: absolute;
+  right: -6%;
+  top: -4%;
+  opacity: 0.16;
+  line-height: 0;
+}
+
+.glyph svg {
+  width: 62cqmin;
+  height: 62cqmin;
+}
+
+.meta {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  font-size: var(--fs-caption);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.title {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 8px;
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  font-size: clamp(14px, 13cqmin, 64px);
+}
+
+.art[data-variant="cover"] .title {
+  font-size: clamp(18px, 16cqw, 48px);
+  bottom: 12px;
+}
+
+.art[data-variant="hero"] .title {
+  font-size: clamp(48px, 9cqw, 120px);
+  left: var(--edge);
+  bottom: 28px;
+}
+
+/* Image pulled from the SWF: sits in the upper part, never cropped,
+   so logos and title cards read whole. The title keeps the bottom. */
+.image {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 28px;
+  bottom: 38%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.art[data-variant="tile"][data-has-image="true"] .title {
+  font-size: clamp(13px, 10cqmin, 40px);
+}
+
+/* Screenshot art: the picture fills the tile, the title sits on a solid
+   band of the tile color along the bottom. */
+.art[data-full="true"] .image {
+  inset: 0;
+}
+
+.art[data-full="true"] .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.art[data-full="true"] .meta {
+  display: none;
+}
+
+.art[data-full="true"] .title {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 6px 10px 8px;
+  background: inherit;
+}
+
+/* A transparent logo on the generated tile gets the whole stage. */
+.art[data-logo="true"] .image {
+  top: 14%;
+  bottom: 14%;
+  left: 10%;
+  right: 10%;
+}
+
+/* Logo laid over a hero or screenshot, bottom left. */
+.logoOver {
+  position: absolute;
+  left: 8%;
+  right: 30%;
+  bottom: 8%;
+  height: 34%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.logoOver img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: left bottom;
+}
+
+/* Small thumbnails (collection strips): no labels, smaller title. */
+.art[data-compact="true"] .meta,
+.art[data-compact="true"] .glyph {
+  display: none;
+}
+
+.art[data-compact="true"] .title {
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  font-size: clamp(10px, 14cqw, 22px);
+}
+
+.art[data-compact="true"][data-full="true"] .title {
+  padding: 3px 6px 4px;
+}

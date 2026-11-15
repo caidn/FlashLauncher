@@ -8,3 +8,5 @@ docs/probe/sample.zip
 *.db-wal
 *.db-shm
 .DS_Store
+public/ruffle/
+public/dev-swfs/

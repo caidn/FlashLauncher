@@ -1,0 +1,70 @@
+.pivot {
+  display: flex;
+  align-items: flex-end;
+  padding: 6px var(--edge) 0 var(--edge);
+  padding-right: 24px;
+  flex: none;
+}
+
+.items {
+  display: flex;
+  gap: 28px;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+/* Pivot headers: large, light, lowercase. Inactive ones fade back. */
+.item {
+  font-size: var(--fs-pivot);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--fg-3);
+  padding-bottom: 6px;
+  transition: color var(--dur) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.item:hover {
+  color: var(--fg-2);
+}
+
+.item[data-active="true"] {
+  color: var(--fg);
+}
+
+.item:active {
+  transform: translateY(2px);
+}
+
+.actions {
+  display: flex;
+  gap: 4px;
+  padding-bottom: 10px;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 64px;
+  padding: 8px 6px 6px;
+  color: var(--fg-2);
+  font-size: var(--fs-caption);
+  text-transform: lowercase;
+  transition: color var(--dur-fast) linear, background-color var(--dur-fast) linear;
+}
+
+.action:hover {
+  color: var(--fg);
+  background: var(--bg-2);
+}
+
+.action[data-active="true"] {
+  color: var(--accent);
+}
+
+.action:active {
+  background: var(--bg-3);
+}

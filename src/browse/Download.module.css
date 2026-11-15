@@ -1,0 +1,5 @@
+/* Sits above the art strip when both run at once. */
+:global(html[data-scraping="true"]) .strip {
+  bottom: 52px;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-fg) 30%, transparent);
+}

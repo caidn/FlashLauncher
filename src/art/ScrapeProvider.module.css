@@ -1,0 +1,68 @@
+@keyframes strip-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+.strip {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 52px;
+  padding: 0 24px 0 var(--edge);
+  background: var(--accent);
+  color: var(--accent-fg);
+  animation: strip-in var(--dur-slow) var(--ease-out) both;
+}
+
+.text {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  min-width: 0;
+  flex: 1;
+}
+
+.label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.current {
+  font-size: var(--fs-small);
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar {
+  width: 240px;
+  flex: none;
+}
+
+/* the progress bar sits on accent here, so flip its colors */
+.bar > div {
+  background: color-mix(in srgb, var(--accent-fg) 25%, transparent);
+}
+
+.bar > div > span {
+  background: var(--accent-fg);
+}
+
+.stop {
+  padding: 4px 12px 5px;
+  border: 2px solid currentColor;
+  font-weight: 600;
+  font-size: var(--fs-small);
+}
+
+.stop:hover {
+  background: var(--accent-fg);
+  color: var(--accent);
+}

@@ -1,0 +1,76 @@
+.tile {
+  position: relative;
+  overflow: hidden;
+  background: var(--accent);
+  color: var(--accent-fg);
+  text-align: left;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.tile::after {
+  /* hover: a thin inner line, Metro style */
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 0 transparent;
+  transition: box-shadow var(--dur-fast) linear;
+  pointer-events: none;
+}
+
+.tile:hover::after {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.45);
+}
+
+.faces {
+  position: absolute;
+  inset: 0;
+}
+
+/* Live tile faces slide up, like Windows Phone "peek" tiles. */
+.face {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+@keyframes face-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes face-out {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
+.face[data-state="in"] {
+  animation: face-in 750ms var(--ease-out) both;
+}
+
+.face[data-state="out"] {
+  animation: face-out 750ms var(--ease-out) both;
+}
+
+.label {
+  position: absolute;
+  left: 10px;
+  bottom: 7px;
+  right: 40px;
+  font-size: var(--fs-small);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.badge {
+  position: absolute;
+  right: 10px;
+  bottom: 6px;
+  font-size: var(--fs-title);
+  font-weight: 300;
+  z-index: 1;
+  pointer-events: none;
+}

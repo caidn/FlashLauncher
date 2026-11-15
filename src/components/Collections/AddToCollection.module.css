@@ -1,0 +1,43 @@
+.list {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+}
+
+.list li:first-child {
+  border-top: 0;
+}
+
+.name {
+  flex: 1;
+  color: var(--fg);
+  cursor: pointer;
+}
+
+.count {
+  font-size: var(--fs-small);
+  color: var(--fg-3);
+}
+
+.newRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 520px;
+}
+
+.newLabel {
+  flex: none;
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}

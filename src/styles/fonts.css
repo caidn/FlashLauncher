@@ -1,0 +1,20 @@
+/* Selawik is Microsoft's open-source (OFL) metric-compatible stand-in for
+   Segoe UI. The font stack prefers the real Segoe UI when Windows has it. */
+@font-face {
+  font-family: "Selawik";
+  src: url("../assets/fonts/Selawik-Light.woff2") format("woff2");
+  font-weight: 100 350;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Selawik";
+  src: url("../assets/fonts/Selawik-Regular.woff2") format("woff2");
+  font-weight: 351 550;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Selawik";
+  src: url("../assets/fonts/Selawik-Bold.woff2") format("woff2");
+  font-weight: 551 900;
+  font-display: swap;
+}
